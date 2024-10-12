@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Datos Personales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+        }
+
+        .formulario {
+            border: 1px solid black;
+            padding: 20px;
+            width: 250px;
+        }
+
+        .formulario h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .formulario label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .formulario input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .formulario input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .formulario .boton-imprimir {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .resultado {
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .resultado .nombre {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .resultado .edad {
+            font-weight: bold;
+        }
+
+        .resultado img {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Formulario de datos personales -->
+        <div class="formulario">
+            <h3>Datos Personales</h3>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" placeholder="Nombre">
+
+            <label for="apaterno">Apellido Paterno</label>
+            <input type="text" id="apaterno" placeholder="A. paterno">
+
+            <label for="amaterno">Apellido Materno</label>
+            <input type="text" id="amaterno" placeholder="A. materno">
+
+            <label>Fecha de Nacimiento</label>
+            <input type="text" id="dia" placeholder="Día" style="width: 30%;">
+            <input type="text" id="mes" placeholder="Mes" style="width: 30%;">
+            <input type="text" id="anio" placeholder="Año" style="width: 30%;">
+
+            <label>Sexo</label>
+            <input type="radio" id="masculino" name="sexo" value="Masculino">
+            <label for="masculino">Masculino</label>
+            <input type="radio" id="femenino" name="sexo" value="Femenino">
+            <label for="femenino">Femenino</label>
+
+            <button class="boton-imprimir" onclick="imprimirDatos()">Imprimir</button>
+        </div>
+
+        <!-- Resultado -->
+        <div class="resultado" id="resultado">
+            <p>Hola <span class="nombre">Mario Martínez Juárez</span></p>
+            <p>Tienes <span class="edad">22</span> años</p>
+            <p>Tu signo zodiacal</p>
+            <p>Es caballo <img src="https://via.placeholder.com/50" alt="Icono Caballo"></p>
+        </div>
+    </div>
+
+    <script>
+        function imprimirDatos() {
+            const nombre = document.getElementById('nombre').value;
+            const apaterno = document.getElementById('apaterno').value;
+            const amaterno = document.getElementById('amaterno').value;
+            const dia = document.getElementById('dia').value;
+            const mes = document.getElementById('mes').value;
+            const anio = document.getElementById('anio').value;
+            const sexo = document.querySelector('input[name="sexo"]:checked').value;
+
+            const edad = new Date().getFullYear() - anio;
+            const nombreCompleto = `${nombre} ${apaterno} ${amaterno}`;
+            const signoZodiacal = "Caballo"; // Puedes agregar lógica para calcular el signo zodiacal
+
+            document.getElementById('resultado').innerHTML = `
+                <p>Hola <span class="nombre">${nombreCompleto}</span></p>
+                <p>Tienes <span class="edad">${edad}</span> años</p>
+                <p>Tu signo zodiacal</p>
+                <p>Es ${signoZodiacal} <img src="https://via.placeholder.com/50" alt="Icono ${signoZodiacal}"></p>
+            `;
+        }
+    </script>
+</body>
+</html>
+
