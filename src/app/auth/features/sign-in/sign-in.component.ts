@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-sing-in',
+  selector: 'app-sign-in',
   standalone: true,
   imports: [],
-  templateUrl: './sing-in.component.html',
+  templateUrl: './sign-in.component.html',
   styles: ``
 })
-export default class SingInComponent {
+export default class SignInComponent {
 
 }

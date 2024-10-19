@@ -1,144 +1,68 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Datos Personales</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            display: flex;
-            align-items: flex-start;
-            gap: 50px;
-        }
-
-        .formulario {
-            border: 1px solid black;
-            padding: 20px;
-            width: 250px;
-        }
-
-        .formulario h3 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .formulario label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .formulario input[type="text"] {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        .formulario input[type="radio"] {
-            margin-right: 5px;
-        }
-
-        .formulario .boton-imprimir {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            text-align: center;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .resultado {
-            text-align: left;
-            font-size: 18px;
-        }
-
-        .resultado .nombre {
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        .resultado .edad {
-            font-weight: bold;
-        }
-
-        .resultado img {
-            width: 50px;
-            height: 50px;
-            background-color: blue;
-            border-radius: 50%;
-            display: inline-block;
-            vertical-align: middle;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Formulario de datos personales -->
-        <div class="formulario">
-            <h3>Datos Personales</h3>
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Nombre">
-
-            <label for="apaterno">Apellido Paterno</label>
-            <input type="text" id="apaterno" placeholder="A. paterno">
-
-            <label for="amaterno">Apellido Materno</label>
-            <input type="text" id="amaterno" placeholder="A. materno">
-
-            <label>Fecha de Nacimiento</label>
-            <input type="text" id="dia" placeholder="Día" style="width: 30%;">
-            <input type="text" id="mes" placeholder="Mes" style="width: 30%;">
-            <input type="text" id="anio" placeholder="Año" style="width: 30%;">
-
-            <label>Sexo</label>
-            <input type="radio" id="masculino" name="sexo" value="Masculino">
-            <label for="masculino">Masculino</label>
-            <input type="radio" id="femenino" name="sexo" value="Femenino">
-            <label for="femenino">Femenino</label>
-
-            <button class="boton-imprimir" onclick="imprimirDatos()">Imprimir</button>
-        </div>
-
-        <!-- Resultado -->
-        <div class="resultado" id="resultado">
-            <p>Hola <span class="nombre">Mario Martínez Juárez</span></p>
-            <p>Tienes <span class="edad">22</span> años</p>
-            <p>Tu signo zodiacal</p>
-            <p>Es caballo <img src="https://via.placeholder.com/50" alt="Icono Caballo"></p>
-        </div>
-    </div>
-
-    <script>
-        function imprimirDatos() {
-            const nombre = document.getElementById('nombre').value;
-            const apaterno = document.getElementById('apaterno').value;
-            const amaterno = document.getElementById('amaterno').value;
-            const dia = document.getElementById('dia').value;
-            const mes = document.getElementById('mes').value;
-            const anio = document.getElementById('anio').value;
-            const sexo = document.querySelector('input[name="sexo"]:checked').value;
-
-            const edad = new Date().getFullYear() - anio;
-            const nombreCompleto = `${nombre} ${apaterno} ${amaterno}`;
-            const signoZodiacal = "Caballo"; // Puedes agregar lógica para calcular el signo zodiacal
-
-            document.getElementById('resultado').innerHTML = `
-                <p>Hola <span class="nombre">${nombreCompleto}</span></p>
-                <p>Tienes <span class="edad">${edad}</span> años</p>
-                <p>Tu signo zodiacal</p>
-                <p>Es ${signoZodiacal} <img src="https://via.placeholder.com/50" alt="Icono ${signoZodiacal}"></p>
-            `;
-        }
-    </script>
-</body>
-</html>
-
+<div class="grid grid-cols-4 gap-8 items-center justify-center">
+  <div class="col-start-1 col-end-3 p-6 bg-white rounded-lg shadow-xl">
+      <h2 class="text-2xl font-bold mb-6 text-red-800">Datos Personales</h2>
+  
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="space-y-6">
+          <!-- Nombre -->
+          <div class="relative">
+              <label for="nombre" class="absolute -top-4 left-2 px-2 bg-white text-sm font-medium text-red-800 transition-all">Nombre</label>
+              <input type="text" id="nombre" class="w-full p-4 bg-white border border-red-300 rounded-lg text-red-900 shadow focus:ring-red-500 focus:border-red-500 focus:outline-none transition-transform transform hover:scale-105" 
+              placeholder="Introduce tu nombre" formControlName="nombre" />
+          </div>
+  
+          <!-- Apellido Paterno -->
+          <div class="relative">
+              <label for="apaterno" class="absolute -top-4 left-2 px-2 bg-white text-sm font-medium text-red-800 transition-all">Apellido Paterno</label>
+              <input type="text" id="apaterno" class="w-full p-4 bg-white border border-red-300 rounded-lg text-red-900 shadow focus:ring-red-500 focus:border-red-500 focus:outline-none transition-transform transform hover:scale-105" 
+              placeholder="Introduce tu apellido paterno" formControlName="apaterno" />
+          </div>
+  
+          <!-- Apellido Materno -->
+          <div class="relative">
+              <label for="amaterno" class="absolute -top-4 left-2 px-2 bg-white text-sm font-medium text-red-800 transition-all">Apellido Materno</label>
+              <input type="text" id="amaterno" class="w-full p-4 bg-white border border-red-300 rounded-lg text-red-900 shadow focus:ring-red-500 focus:border-red-500 focus:outline-none transition-transform transform hover:scale-105" 
+              placeholder="Introduce tu apellido materno" formControlName="amaterno" />
+          </div>
+  
+          <!-- Fecha de Nacimiento -->
+          <div>
+              <label class="block mb-2 text-sm font-medium text-red-800">Fecha de Nacimiento</label>
+              <div class="flex space-x-4">
+                  <input type="number" id="dia" placeholder="Día" class="w-1/3 p-4 bg-white border border-red-300 rounded-lg text-red-900 shadow focus:ring-red-500 focus:border-red-500 transition-transform transform hover:scale-105" formControlName="dia" />
+                  <input type="number" id="mes" placeholder="Mes" class="w-1/3 p-4 bg-white border border-red-300 rounded-lg text-red-900 shadow focus:ring-red-500 focus:border-red-500 transition-transform transform hover:scale-105" formControlName="mes" />
+                  <input type="number" id="ano" placeholder="Año" class="w-1/3 p-4 bg-white border border-red-300 rounded-lg text-red-900 shadow focus:ring-red-500 focus:border-red-500 transition-transform transform hover:scale-105" formControlName="ano" />
+              </div>
+          </div>
+  
+          <!-- Sexo -->
+          <div>
+              <label class="block mb-2 text-sm font-medium text-red-800">Sexo</label>
+              <div class="flex space-x-6">
+                  <label class="inline-flex items-center">
+                      <input type="radio" formControlName="sexo" value="masculino" class="text-red-600 focus:ring-red-500">
+                      <span class="ml-2 text-red-700">Masculino</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                      <input type="radio" formControlName="sexo" value="femenino" class="text-red-600 focus:ring-red-500">
+                      <span class="ml-2 text-red-700">Femenino</span>
+                  </label>
+              </div>
+          </div>
+  
+          <!-- Submit Button -->
+          <button type="submit" 
+          (click)="subImprimir()"
+          class="w-full text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-lg px-6 py-3 text-center transition-transform transform hover:scale-110 shadow-lg"> 
+          Imprimir
+          </button>
+      </form>
+  </div>
+  
+  <div class="col-start-3 col-end-5 text-[22px] p-8 bg-white rounded-lg shadow-lg">
+    <p class="font-bold text-red-800 mb-4">Resumen</p>
+    <p class="mb-2 text-red-700"><span class="font-medium">Nombre:</span> {{ formGroup.value.nombre }} {{ formGroup.value.apaterno }} {{ formGroup.value.amaterno }}</p>
+    <p class="mb-2 text-red-700"><span class="font-medium">Edad:</span> {{ edad }} años</p>
+    <p class="mb-4 text-red-700"><span class="font-medium">Signo Zodiacal Chino:</span> {{ signoChino }}</p>
+    <img [src]="imagenSigno" alt="Signo Zodiacal Chino" class="w-24 h-24 rounded-full border-2 border-red-500 shadow-md">
+  </div>
+</div>
